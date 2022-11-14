@@ -17,15 +17,17 @@ app.use("/posts", postRoutes);
 const CONNECTION_URL = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 
-
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() =>
-    console.log('Database ti set')
-  )
+  .then(() => console.log("Database ti set"))
   .catch((error) => console.log(`${error} did not connect`));
 
 mongoose.set("useFindAndModify", false);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to my Memories API");
+});
+
 app.listen(PORT, () =>
-      console.log(`Server Running on Port: http://localhost:${PORT}`)
-    )
+  console.log(`Server Running on Port: http://localhost:${PORT}`)
+);
